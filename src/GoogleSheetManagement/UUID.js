@@ -84,3 +84,6 @@ function deleteAllServiceProperties() {
     let documentProperties = PropertiesService.getDocumentProperties();
     documentProperties.deleteAllProperties();
 }
+
+
+export { generateUserID }

@@ -15,3 +15,5 @@ const MONTH_DESCRIPTION = {
     11: "11. Listopad",
     12: "12. Grudzień",
 };
+
+export { SOURCE_FOLDER_ID, DESTINATION_FOLDER_ID, MONTH_DESCRIPTION }
