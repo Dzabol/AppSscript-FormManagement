@@ -1,7 +1,3 @@
-import { SOURCE_FOLDER_ID, DESTINATION_FOLDER_ID, MONTH_DESCRIPTION } from "./MainVariables/variables";
-import { generateUserID } from "./GoogleSheetManagement/UUID";
-import { setUserFolder } from "./FolderManagement/setUserFolder";
-
 function createNewUser({
     sourceFolderWithTemplatesID = SOURCE_FOLDER_ID,
     dataBaseFolderID = DESTINATION_FOLDER_ID,

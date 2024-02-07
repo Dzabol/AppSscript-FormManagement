@@ -24,6 +24,7 @@
  * console.log(`Error Message: ${folderInfo.errorMessage}`);
  */
 
+
 function listRootFolders_(sourceFolderId) {
     let dataInformation = {
         items: [],

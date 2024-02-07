@@ -61,7 +61,7 @@ function setUserFolder(mainFolderID, userFolderName) {
   return userFolder.id
 }
 
-export { setUserFolder }
+
 
 
 

@@ -1,5 +1,3 @@
-import { generateUserID } from "./UUID";
-
 function generateUserName({ userID, creationDate, userName, userSurname, nameOfTheTown }) {
 
     const capitalizeFirstLetter = (text) => {
