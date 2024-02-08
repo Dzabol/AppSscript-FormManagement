@@ -1,19 +1,22 @@
-function createNewUser({
-    sourceFolderWithTemplatesID = SOURCE_FOLDER_ID,
-    dataBaseFolderID = DESTINATION_FOLDER_ID,
+function createNewUser_({
+    sourceFolderWithTemplatesID,
+    dataBaseFolderID,
     aplicationName,
     currentYearTabNameWithPotentialCustomers }) {
 
-    const newUserID = generateUserID(currentYearTabNameWithPotentialCustomers, aplicationName)
+    //const newUserID = generateUserID(currentYearTabNameWithPotentialCustomers, aplicationName)
     const newUserFolderID = setUserFolder(dataBaseFolderID,)
     const filesDataFromSourceFolder = listRootFolders_(sourceFolderWithTemplatesID);
-    const totalFiles = filesDataFromSourceFolder.totalFiles;
-    const totalFolders = filesDataFromSourceFolder.totalFolders;
+    const totalFiles = filesDataFromSourceFolder.totalNumberOfFiles;
+    const totalFolders = filesDataFromSourceFolder.totalNumberOfFolders;
+
+    console.log(`Foldery: ${totalFolders}
+    Pliki: ${totalFiles}`)
 
 
     const progressState = {
-        totalFiles,
-        totalFolders,
+        totalNumberOfFiles: totalFiles,
+        totalNumberOfFolders: totalFolders,
         copiedFiles: 0,
         copiedFolders: 0,
         currentFile: 0,
@@ -29,6 +32,25 @@ function createNewUser({
         onProgress: progressCallback,
     })
 
+}
+
+
+function testowe() {
+    createNewUser_({
+        sourceFolderWithTemplatesID: SOURCE_FOLDER_ID,
+        dataBaseFolderID: DESTINATION_FOLDER_ID,
+        aplicationName: "TEST",
+        currentYearTabNameWithPotentialCustomers: "2024"
+    })
+}
+
+function iloscPlikow() {
+    const filesDataFromSourceFolder = listRootFolders_(SOURCE_FOLDER_ID);
+    const totalFiles = filesDataFromSourceFolder.totalNumberOfFiles;
+    const totalFolders = filesDataFromSourceFolder.totalNumberOfFolders;
+
+    console.log(`Foldery: ${totalFolders} Pliki: ${totalFiles}`)
+    console.log(filesDataFromSourceFolder)
 }
 
 

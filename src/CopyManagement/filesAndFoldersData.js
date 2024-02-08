@@ -9,8 +9,8 @@
  *
  * @typedef {Object} FileAndFolderInfo
  * @property {Array} files - Array of objects representing files in the folder.
- * @property {number} totalFiles - The total count of files in the folder.
- * @property {number} totalFolders - The total count of folders in the folder.
+ * @property {number} totalNumberOfFiles - The total count of files in the folder.
+ * @property {number} totalNumberOfFolders - The total count of folders in the folder.
  * @property {boolean} isThereError - Indicates if an error occurred during execution.
  * @property {string} errorMessage - Detailed error message if an error occurred.
  *
@@ -24,50 +24,59 @@
  * console.log(`Error Message: ${folderInfo.errorMessage}`);
  */
 
-
 function listRootFolders_(sourceFolderId) {
     let dataInformation = {
         items: [],
-        totalFiles: 0,
-        totalFolders: 0,
+        totalNumberOfFiles: 0,
+        totalNumberOfFolders: 0,
         isThereError: false,
         errorMessage: null,
     }
 
+    let sourceFolder = DriveApp.getFolderById(sourceFolderId)
+    let folders = sourceFolder.getFolders()
     let files;
     let pageToken = null;
 
-    do {
-        try {
-            files = Drive.Files.list({
-                q: `"${sourceFolderId}" in parents and trashed = false`,
-                pageSize: 1000,
-                fields: 'nextPageToken, files(id,name,mimeType,webViewLink,webContentLink,contentHints/thumbnail,fileExtension,iconLink,size,thumbnailLink,parents, kind, trashed, owners, modifiedTime)',
-                pageToken: pageToken
-            });
+    const generateData = (idNumber) => {
+        files = Drive.Files.list({
+            q: `"${idNumber}" in parents and trashed = false`,
+            includeItemsFromAllDrives: true,
+            supportsAllDrives: true,
+            corpora: 'allDrives',
+            pageSize: 1000,
+            pageToken: pageToken,
+            fields: 'nextPageToken, files(id,name,mimeType,webViewLink,webContentLink,contentHints/thumbnail,fileExtension,iconLink,size,thumbnailLink,parents, kind, owners, modifiedTime)',
 
-            if (!files.files || files.files.length === 0) {
-                console.log('No files found.');
+        });
 
-                return { ...dataInformation, isThereError: true, errorMessage: 'No files found.' };
+        if (!files.files || files.files.length === 0) return
 
-            }
-
-            for (let i = 0; i < files.files.length; i++) {
-                const file = files.files[i];
-                // console.log('%s (ID: %s, Type: %s, URL: %s)', file.name, file.id, file.mimeType, file.webContentLink);
-
-                if (file.mimeType === "application/vnd.google-apps.folder") {
-                    dataInformation.totalFolders++;
-                } else {
-                    dataInformation.totalFiles++;
-                    if (file.mimeType === "application/vnd.google-apps.shortcut") {
-                        dataInformation.totalFiles++; // Zwiększ liczbę plików dla skrótu
-                    }
+        for (let i = 0; i < files.files.length; i++) {
+            const file = files.files[i];
+            dataInformation.items.push(file);
+            if (file.mimeType === "application/vnd.google-apps.folder") {
+                dataInformation.totalNumberOfFolders++;
+            } else {
+                dataInformation.totalNumberOfFiles++;
+                if (file.mimeType === "application/vnd.google-apps.shortcut") {
+                    dataInformation.totalNumberOfFiles++; // Zwiększ liczbę plików dla skrótu
                 }
             }
+        }
+        pageToken = files.nextPageToken;
+    }
 
-            pageToken = files.nextPageToken;
+    do {
+        try {
+            generateData(sourceFolderId);
+            //Generate for subfolders
+            while (folders.hasNext()) {
+
+                let currentfolderID = folders.next().getId();
+                generateData(currentfolderID);
+                listRootFolders_(currentfolderID)
+            }
         } catch (err) {
             console.log('Failed with error %s', err.message);
             dataInformation.isThereError = true;
@@ -78,3 +87,4 @@ function listRootFolders_(sourceFolderId) {
 
     return { ...dataInformation, items: files.files }
 }
+

@@ -1,4 +1,4 @@
-function generateUserName({ userID, creationDate, userName, userSurname, nameOfTheTown }) {
+function generatecustomerIdentificationName({ userID, creationDate, userName, userSurname, nameOfTheTown }) {
 
     const capitalizeFirstLetter = (text) => {
         let removedWhiteSpaces = text.trim()
@@ -11,7 +11,7 @@ function generateUserName({ userID, creationDate, userName, userSurname, nameOfT
     let month = dateObject.getMonth() + 1;
     let day = dateObject.getDate();
 
-    let userName = `${userID} ${year}.${month}.${day} ${capitalizeFirstLetter(userName)} ${capitalizeFirstLetter(userSurname)} ${userSurname(nameOfTheTown)}`
-    console.log(userName)
-    return userName
+    let customerIdentificationName = `${userID} ${year}.${month}.${day} ${capitalizeFirstLetter(userName)} ${capitalizeFirstLetter(userSurname)} ${userSurname(nameOfTheTown)}`
+    console.log(customerIdentificationName)
+    return customerIdentificationName
 }

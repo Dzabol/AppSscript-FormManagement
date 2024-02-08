@@ -60,8 +60,3 @@ function setUserFolder(mainFolderID, userFolderName) {
 
   return userFolder.id
 }
-
-
-
-
-
