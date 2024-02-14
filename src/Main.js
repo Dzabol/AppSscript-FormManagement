@@ -40,6 +40,9 @@ function testowe(
   templatesFolderID = SOURCE_FOLDER_ID, 
   namesForTheMonths = MONTH_DESCRIPTION,
 ) {
+    
+    // const newPotentialCustomerID = generateUserID(currentYearTabNameWithPotentialCustomers, aplicationName)
+    const newPotentialCustomerID = 1;
 
     const userFolderID = setUserFolder({
       mainFolderID: dataBaseFolderID,
