@@ -35,22 +35,32 @@ function createNewUser_({
 }
 
 
-function testowe() {
-    createNewUser_({
-        sourceFolderWithTemplatesID: SOURCE_FOLDER_ID,
-        dataBaseFolderID: DESTINATION_FOLDER_ID,
-        aplicationName: "TEST",
-        currentYearTabNameWithPotentialCustomers: "2024"
-    })
+function testowe(
+  dataBaseFolderID = DESTINATION_FOLDER_ID,
+  templatesFolderID = SOURCE_FOLDER_ID, 
+  namesForTheMonths = MONTH_DESCRIPTION,
+) {
+
+    const userFolderID = setUserFolder({
+      mainFolderID: dataBaseFolderID,
+      userFolderName: "TEST2",
+      monthDescription: namesForTheMonths
+      })
+    
+    // createNewUser_({
+    //     sourceFolderWithTemplatesID: SOURCE_FOLDER_ID,
+    //     dataBaseFolderID: DESTINATION_FOLDER_ID,
+    //     aplicationName: "TEST",
+    //     currentYearTabNameWithPotentialCustomers: "2024"
+    // })
 }
 
 function iloscPlikow() {
     const filesDataFromSourceFolder = listRootFolders_(SOURCE_FOLDER_ID);
     const totalFiles = filesDataFromSourceFolder.totalNumberOfFiles;
     const totalFolders = filesDataFromSourceFolder.totalNumberOfFolders;
-
     console.log(`Foldery: ${totalFolders} Pliki: ${totalFiles}`)
-    console.log(filesDataFromSourceFolder)
+
 }
 
 
