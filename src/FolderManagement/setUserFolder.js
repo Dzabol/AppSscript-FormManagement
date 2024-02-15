@@ -8,14 +8,15 @@
  *
  * @param {string} mainFolderID - The ID of the main folder where the user structure will be created.
  * @param {string} userFolderName - The name of the user-specific folder to be created.
+ * @param {string} manualMontNumber - Manula number of the month to set user
  * @returns {string} - string with ID of userFolder
  */
 
-function setUserFolder({mainFolderID, userFolderName, monthDescription}) {
+function setUserFolder({mainFolderID, userFolderName, monthDescription, manualMontNumber = null}) {
   if (!userFolderName) return;
 
   let currentDate = new Date()
-  let month = (currentDate.getMonth() + 1).toString();
+  let month = manualMontNumber ? manualMontNumber.toString() : (currentDate.getMonth() + 1).toString();
   let year = currentDate.getFullYear().toString()
 
   const yearFolderData = folderToSetData_(mainFolderID, year)

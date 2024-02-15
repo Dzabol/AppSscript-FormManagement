@@ -1,7 +1,25 @@
-SOURCE_FOLDER_ID = "1rPPeQBJA8uv9aAJLAWjZ7L6COa8Jqpd9"
-DESTINATION_FOLDER_ID = "1LTDyHFS4G-NXAauD1WwIUIfvD0yvI8CU"
+/**
+ * *****************************************************************************
+ *                        MAIN FOLDERS 
+ * ***************************************************************************** 
+*/
+
+FOLDER_ID_WITH_TEMPLATE_FILES = "1rPPeQBJA8uv9aAJLAWjZ7L6COa8Jqpd9"     
+FOLDER_ID_TO_STORE_FILES_WITH_CUSTOMERS = "1LTDyHFS4G-NXAauD1WwIUIfvD0yvI8CU"
+
+
+/**
+ * *****************************************************************************
+ *                        TEMPLATE DATA
+ * ***************************************************************************** 
+*/
+//Template sheet data
 TEMPLATE_DATA_BASE_SHEET_ID = "1N0DsNIOfElOHwTd7TeHsCJp5DPTiQX52mFBopHsOMR0"
 TEMPLATE_DATA_BASE_SHEET_NAME = "TEMPLATE"
+
+//Description Data
+UUID_NAME = "FOTO"
+UIID_QUANTITY_OF_ZEROS = 7;
 
 const MONTH_DESCRIPTION = {
     1: "1. Styczeń",

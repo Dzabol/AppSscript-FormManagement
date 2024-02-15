@@ -17,6 +17,26 @@ function generateUserID(tabNameInGoogleSheet, nameForSalesApplication) {
 }
 
 /**
+ * *******************************************************************************************
+ * Generates a formatted ID for a given application, incorporating a numeric identifier
+ * padded with leading zeros to achieve a specified length.
+ * *******************************************************************************************
+ * 
+ * @param {string} applicationName - The name or code of the application.
+ * @param {number} uuidNumber - The numeric identifier to be incorporated into the ID.
+ * @param {number} quantityOfZeros - The desired length of the numeric identifier with leading zeros.
+ * @returns {string} The formatted ID in the pattern "[applicationName-numericIdentifier]".
+ */
+function generateIDForCurrentForSalesApplication_(aplicationName = "FOTO", uuidNumber = 0, quantityOfZeros = 7) {
+
+    let idNumberInString = uuidNumber.toString();
+    let numberFilledWithZeros = idNumberInString.padStart(quantityOfZeros, "0")
+    let idNumber = `[${aplicationName}-${numberFilledWithZeros}]`
+
+    return idNumber
+}
+
+/**
  * *****************************************************************************
  * Generates and returns a unique identifier for a specified tab in a Google Sheets document.
  * If the tab does not exist in the document properties, it will be created with the default reset value.
@@ -63,25 +83,7 @@ function generateGoogleSheetUUIDNumber_(tabName = "defult", resetValue = false) 
 }
 
 
-/**
- * *******************************************************************************************
- * Generates a formatted ID for a given application, incorporating a numeric identifier
- * padded with leading zeros to achieve a specified length.
- * *******************************************************************************************
- * 
- * @param {string} applicationName - The name or code of the application.
- * @param {number} uuidNumber - The numeric identifier to be incorporated into the ID.
- * @param {number} quantityOfZeros - The desired length of the numeric identifier with leading zeros.
- * @returns {string} The formatted ID in the pattern "[applicationName-numericIdentifier]".
- */
-function generateIDForCurrentForSalesApplication_(aplicationName = "FOTO", uuidNumber = 0, quantityOfZeros = 7) {
 
-    let idNumberInString = uuidNumber.toString();
-    let numberFilledWithZeros = idNumberInString.padStart(quantityOfZeros, "0")
-    let idNumber = `[${aplicationName}-${numberFilledWithZeros}]`
-
-    return idNumber
-}
 
 
 function deleteAllServiceProperties() {

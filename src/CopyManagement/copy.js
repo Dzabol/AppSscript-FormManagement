@@ -65,7 +65,7 @@ function copyFoldersAndFiles_({
 
         if (onProgress) {
             progressState.currentFolder++;
-            progressState.progressPercentageFolders = Math.round((progressState.currentFolder / progressState.totalFolders) * 100);
+            progressState.progressPercentageFolders = Math.round((progressState.currentFolder / progressState.totalNumberOfFolders) * 100);
             onProgress(progressState);
         }
 
@@ -148,7 +148,7 @@ function copyAllFilesInFolder_({
 
         if (onProgress) {
             progressState.currentFile++;
-            progressState.progressPercentageFiles = Math.round((progressState.currentFile / progressState.totalFiles) * 100);
+            progressState.progressPercentageFiles = Math.round((progressState.currentFile / progressState.totalNumberOfFiles) * 100);
             onProgress(progressState);
         }
     }
