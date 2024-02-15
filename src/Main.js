@@ -22,50 +22,54 @@
  * console.log(result.customerID);
  * console.log(result.customerFolderID);
  */
- 
-function createNewUser(
-  dataBaseFolderID = FOLDER_ID_TO_STORE_FILES_WITH_CUSTOMERS,
-  templatesFolderID = FOLDER_ID_WITH_TEMPLATE_FILES, 
-  descriptionsOfTheMonths = MONTH_DESCRIPTION,
-  customerBasicData = ["2024-01-10 20:28:16","Paulina","Kowalska","Skawina"]
+
+function createNewCustomer(
+    aplicationName = UUID_NAME,
+    dataBaseFolderID = FOLDER_ID_TO_STORE_FILES_WITH_CUSTOMERS,
+    templatesFolderID = FOLDER_ID_WITH_TEMPLATE_FILES,
+    descriptionsOfTheMonths = MONTH_DESCRIPTION,
+    customerBasicData = ["2024-01-10 20:28:16", "Paulina", "Kowalska", "Skawina"]
 ) {
-  // Generate customer ID
-  // const newPotentialCustomerID = generateUserID(currentYearTabNameWithPotentialCustomers, aplicationName)
-  const newPotentialCustomerID = "[FOTO0001]";
-  const customerDescription = generatecustomerIdentificationName({ 
-    userID: newPotentialCustomerID,  
-    creationDate: customerBasicData[0].toString(), 
-    userName: customerBasicData[1].toString(), 
-    userSurname: customerBasicData[2].toString(), 
-    nameOfTheTown: customerBasicData[3].toString() });
+    const date = new Date()
+    const year = date.getFullYear().toString()
+    // Generate customer ID
+    // const newPotentialCustomerID = generateUserID(year, aplicationName)
+    const newPotentialCustomerID = "[FOTO0001]";
+    const customerDescription = generatecustomerIdentificationName({
+        userID: newPotentialCustomerID,
+        creationDate: customerBasicData[0].toString(),
+        userName: customerBasicData[1].toString(),
+        userSurname: customerBasicData[2].toString(),
+        nameOfTheTown: customerBasicData[3].toString()
+    });
 
-  // Create user folder
-  const userFolderID = setUserFolder({
-    mainFolderID: dataBaseFolderID,
-    userFolderName: customerDescription,
-    monthDescription: descriptionsOfTheMonths
-  });
+    // Create user folder
+    const userFolderID = setUserFolder({
+        mainFolderID: dataBaseFolderID,
+        userFolderName: customerDescription,
+        monthDescription: descriptionsOfTheMonths
+    });
 
-  // Copy template files and folders
-  const listOfTheDataFromTemplateFolder = listRootFolders_(templatesFolderID);
-  let progressState = {
-    totalNumberOfFiles: listOfTheDataFromTemplateFolder.totalNumberOfFiles,
-    totalNumberOfFolders: listOfTheDataFromTemplateFolder.totalNumberOfFolders,
-    copiedFiles: 0,
-    copiedFolders: 0,
-    currentFile: 0,
-    currentFolder: 0,
-    progressPercentageFiles: 0,
-    progressPercentageFolders: 0,
-  };
+    // Copy template files and folders
+    const listOfTheDataFromTemplateFolder = listRootFolders_(templatesFolderID);
+    let progressState = {
+        totalNumberOfFiles: listOfTheDataFromTemplateFolder.totalNumberOfFiles,
+        totalNumberOfFolders: listOfTheDataFromTemplateFolder.totalNumberOfFolders,
+        copiedFiles: 0,
+        copiedFolders: 0,
+        currentFile: 0,
+        currentFolder: 0,
+        progressPercentageFiles: 0,
+        progressPercentageFolders: 0,
+    };
 
-  copyFoldersAndFiles_({
-    sourceFolderID: templatesFolderID,
-    destinationFolderID: userFolderID,
-    prefixforTheFileName: customerDescription,
-    progressState,
-    onProgress: progressCallback,
-  });
+    copyFoldersAndFiles_({
+        sourceFolderID: templatesFolderID,
+        destinationFolderID: userFolderID,
+        prefixforTheFileName: customerDescription,
+        progressState,
+        onProgress: progressCallback,
+    });
 
-  return {customerID: newPotentialCustomerID, customerFolderID: userFolderID}
+    return { customerID: newPotentialCustomerID, customerFolderID: userFolderID }
 }

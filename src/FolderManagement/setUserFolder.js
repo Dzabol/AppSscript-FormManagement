@@ -12,7 +12,7 @@
  * @returns {string} - string with ID of userFolder
  */
 
-function setUserFolder({mainFolderID, userFolderName, monthDescription, manualMontNumber = null}) {
+function setUserFolder({ mainFolderID, userFolderName, monthDescription, manualMontNumber = null }) {
   if (!userFolderName) return;
 
   let currentDate = new Date()

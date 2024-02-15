@@ -14,15 +14,15 @@
  * console.log(`Number of folders with the same name: ${count}`);
  */
 
-function checkQuantityOfTheSameFolderNames_(mainFolderID, folderNameToSearch){
+function checkQuantityOfTheSameFolderNames_(mainFolderID, folderNameToSearch) {
   let theSameFoldersQuantity = 0;
-  const mainFolder =  DriveApp.getFolderById(mainFolderID);
+  const mainFolder = DriveApp.getFolderById(mainFolderID);
   const allFoldersInMainFolder = mainFolder.getFolders();
 
-  while(allFoldersInMainFolder.hasNext()){
+  while (allFoldersInMainFolder.hasNext()) {
     let folder = allFoldersInMainFolder.next()
-    if(folder.getName().toLowerCase() === folderNameToSearch.toLowerCase()) theSameFoldersQuantity++
-      }
+    if (folder.getName().toLowerCase() === folderNameToSearch.toLowerCase()) theSameFoldersQuantity++
+  }
 
   return theSameFoldersQuantity;
 }
@@ -43,19 +43,18 @@ function checkQuantityOfTheSameFolderNames_(mainFolderID, folderNameToSearch){
  * console.log(`Number of folders with the same base name: ${count}`);
  */
 
-function findQuantiyOfFoldersWithTheSameBaseName_(mainFolderID, baseName){
+function findQuantiyOfFoldersWithTheSameBaseName_(mainFolderID, baseName) {
   let quantityOfTheSameBase = 0;
   const mainFolder = DriveApp.getFolderById(mainFolderID);
   const allFoldersInMainFolder = mainFolder.getFolders();
-  
-  while(allFoldersInMainFolder.hasNext())
-  {
+
+  while (allFoldersInMainFolder.hasNext()) {
     let folder = allFoldersInMainFolder.next();
     let folderName = folder.getName();
     folderName.toString().startsWith(baseName) && quantityOfTheSameBase++;
   }
 
-return quantityOfTheSameBase;
+  return quantityOfTheSameBase;
 }
 
 
@@ -112,7 +111,7 @@ function folderToSetData_(mainFolderID, folderName, insertDataInFirstExistingFol
   if (existingFolder && insertDataInFirstExistingFolder) {
     return { id: existingFolder.getId(), link: existingFolder.getUrl() };
   } else {
-    newFolderName = `${folderName}-[${findQuantiyOfFoldersWithTheSameBaseName_(mainFolderID,folderName) + 1}]`;
+    newFolderName = `${folderName}-[${findQuantiyOfFoldersWithTheSameBaseName_(mainFolderID, folderName) + 1}]`;
     let aditional
     return createFolder(mainFolder, newFolderName);
   }
