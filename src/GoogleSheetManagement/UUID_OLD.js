@@ -23,15 +23,18 @@ function generateUserID(tabNameInGoogleSheet, nameForSalesApplication) {
  * *******************************************************************************************
  * 
  * @param {string} applicationName - The name or code of the application.
- * @param {number} uuidNumber - The numeric identifier to be incorporated into the ID.
+ * @param {number} aplicationCount - The numeric identifier to be incorporated into the ID.
  * @param {number} quantityOfZeros - The desired length of the numeric identifier with leading zeros.
  * @returns {string} The formatted ID in the pattern "[applicationName-numericIdentifier]".
  */
-function generateIDForCurrentForSalesApplication_(aplicationName = "FOTO", uuidNumber = 0, quantityOfZeros = 7) {
+function generateIDForCurrentForSalesApplication_(aplicationName = "FOTO", aplicationCount = 0, customerID = 0, quantityOfZeros = 7) {
 
-    let idNumberInString = uuidNumber.toString();
+    const date = new Date()
+    const year = date.getFullYear();
+
+    let idNumberInString = aplicationCount.toString();
     let numberFilledWithZeros = idNumberInString.padStart(quantityOfZeros, "0")
-    let idNumber = `[${aplicationName}-${numberFilledWithZeros}]`
+    let idNumber = `[${aplicationName}/${year}/${numberFilledWithZeros}/${customerID}]`
 
     return idNumber
 }
@@ -81,7 +84,6 @@ function generateGoogleSheetUUIDNumber_(tabName = "defult", resetValue = false) 
 
     return currentPropertiesForTab[tabName].currentID;
 }
-
 
 
 
