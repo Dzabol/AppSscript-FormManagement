@@ -56,15 +56,15 @@ const FIELDS_OF_INTERESTS_INPUTDATA = {
     urlRowTemplatePosition: 3,
   },
   "Magazyny energii": {
-    urlColumnPosition: 10,
+    urlColumnPosition: 11,
     urlRowTemplatePosition: 4
   },
   "Kolektory solarne": {
-    urlColumnPosition: 11,
+    urlColumnPosition: 13,
     urlRowTemplatePosition: 5
   },
   "Pompy ciepła": {
-    urlColumnPosition: 12,
+    urlColumnPosition: 15,
     urlRowTemplatePosition: 6
   },
 }

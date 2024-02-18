@@ -1,10 +1,24 @@
+/**
+ * ***************************************************************************** 
+ * Generates a unique customer ID and creates hyperlinks for each selected form of interest.
+ * *****************************************************************************
+ * 
+ * @param {Object} eventData - The event data containing information about the form submission event.
+ * @param {Object} FIELDS_OF_INTERESTS_INPUTDATA - Object containing information about fields of interest.
+ * @param {Object} FORM_TEMPLATES_DATA - Object containing information about form templates.
+ * @returns {Object} - Object containing the customer ID and an array of form names with corresponding URLs.
+ */
+
 function generateIDAndURLAdressForNewCustomer(eventData, FIELDS_OF_INTERESTS_INPUTDATA, FORM_TEMPLATES_DATA) {
     const sheetName = eventData.range.getSheet().getName();
     const sheetId = eventData.range.getSheet().getParent().getId();
     const spreadSheet = SpreadsheetApp.openById(sheetId);
     const tabToSaveData = spreadSheet.getSheetByName(sheetName);
+    const tabWithTemplatesData = spreadSheet.getSheetByName(FORM_TEMPLATES_DATA.templatesTabName)
+
     let dataToSendToCustomer = {
         ID: generateCustomerID(),
+        email: eventData.namedValues["Adres e-mail"],
         forms: []
     };
 
@@ -18,11 +32,11 @@ function generateIDAndURLAdressForNewCustomer(eventData, FIELDS_OF_INTERESTS_INP
 
     //Get data from form
     const data = {
-        ID: customerID,
-        NAME: e.namedValues["Imię"],
-        SURNAME: e.namedValues["Nazwisko"],
-        TOWN: e.namedValues["Miejscowość"],
-        PHONE: e.namedValues["Telefon"],
+        ID: dataToSendToCustomer.ID,
+        NAME: eventData.namedValues["Imię"],
+        SURNAME: eventData.namedValues["Nazwisko"],
+        TOWN: eventData.namedValues["Miejscowość"],
+        PHONE: eventData.namedValues["Telefon"],
     }
 
     //Marked by customer fields of interests
@@ -34,17 +48,17 @@ function generateIDAndURLAdressForNewCustomer(eventData, FIELDS_OF_INTERESTS_INP
 
         if (FIELDS_OF_INTERESTS_INPUTDATA.hasOwnProperty(interest)) {
             const interestData = FIELDS_OF_INTERESTS_INPUTDATA[interest];
-            const templateURL = FORM_TEMPLATES_DATA.templatesTabName.getRange(interestData.urlRowTemplatePosition, FORM_TEMPLATES_DATA.urlColumnPositionForTemplateForm).getValue();
+            const templateURL = tabWithTemplatesData.getRange(interestData.urlRowTemplatePosition, FORM_TEMPLATES_DATA.urlColumnPositionForTemplateForm).getValue();
 
             const rangeToSetNewURL = tabToSaveData.getRange(rowNumber, interestData.urlColumnPosition);
             const newUrl = replaceDataInURL(templateURL, data);
 
-            // Set new URL
+            // Set new URL to Pre-Filled Form
             //rangeToSetNewURL.setValue(newUrl);
-            const hyperlinkFormula = `=HYPERLINK("${newUrl}", "Link")`;
+            const hyperlinkFormula = `=HYPERLINK("${newUrl}";"Pre-Filled Form Link")`;
             rangeToSetNewURL.setFormula(hyperlinkFormula);
 
-            dataToSendToCustomer.push({
+            dataToSendToCustomer.forms.push({
                 formName: interest,
                 formURL: newUrl,
             })
@@ -100,3 +114,5 @@ function replaceDataInURL(url, data) {
 
     return urlString;
 }
+
+
