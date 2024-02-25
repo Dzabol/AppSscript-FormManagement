@@ -1,6 +1,6 @@
 function sendEmailWithLinks(dataToSend) {
     console.log(dataToSend.email)
-    const subject = "Formularze"
+    const subject = `Formularze - [${dataToSend.ID}]`
     let forms = ""
 
     // Iterate through each form in the dataToSend object
@@ -32,7 +32,7 @@ function sendEmailWithLinks(dataToSend) {
 }
 
 
-function sendEmailAsHTML(docId = "1kyUM_YNijGjo4z5lexKL-sNI_1BFjWkPiVHX7LOjngA") {
+function sendEmailAsHTMLFromTemplate(docId = "1kyUM_YNijGjo4z5lexKL-sNI_1BFjWkPiVHX7LOjngA") {
     var doc = DocumentApp.openById(docId)
     var url = "https://docs.google.com/feeds/download/documents/export/Export?exportFormat=html&id=" + doc.getId();
     var html = UrlFetchApp.fetch(url, { headers: { authorization: "Bearer " + ScriptApp.getOAuthToken() } }).getContentText();

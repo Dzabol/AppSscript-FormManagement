@@ -79,7 +79,7 @@ function generateIDAndURLAdressForNewCustomer(eventData, FIELDS_OF_INTERESTS_INP
  */
 
 
-function generateCustomerID() {
+function generateCustomerID(prefix = "") {
 
     const lengthofUUID = 6;
 
@@ -91,7 +91,7 @@ function generateCustomerID() {
     const day = date.getDate().toString().padStart(2, "0");
     let extractedDigits = id.substring(id.length - lengthofUUID);
 
-    return `[${year}/${month}/${day}/${extractedDigits}]`;
+    return `[${prefix && `${prefix} -`}${year}/${month}/${day}/${extractedDigits}]`;
 }
 
 /**

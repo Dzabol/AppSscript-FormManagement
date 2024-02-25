@@ -1,15 +1,5 @@
 /**
  * *****************************************************************************
- *                        MAIN FOLDERS 
- * ***************************************************************************** 
-*/
-
-FOLDER_ID_WITH_TEMPLATE_FILES = "1rPPeQBJA8uv9aAJLAWjZ7L6COa8Jqpd9"
-FOLDER_ID_TO_STORE_FILES_WITH_CUSTOMERS = "1LTDyHFS4G-NXAauD1WwIUIfvD0yvI8CU"
-
-
-/**
- * *****************************************************************************
  *                        TEMPLATE DATA
  * ***************************************************************************** 
 */
@@ -17,9 +7,6 @@ FOLDER_ID_TO_STORE_FILES_WITH_CUSTOMERS = "1LTDyHFS4G-NXAauD1WwIUIfvD0yvI8CU"
 TEMPLATE_DATA_BASE_SHEET_ID = "1N0DsNIOfElOHwTd7TeHsCJp5DPTiQX52mFBopHsOMR0"
 TEMPLATE_DATA_BASE_SHEET_NAME = "TEMPLATE"
 
-//Description Data
-UUID_NAME = "FOTO"
-UIID_QUANTITY_OF_ZEROS = 7;
 
 const MONTH_DESCRIPTION = {
   1: "1. Styczeń",
@@ -45,27 +32,49 @@ const MONTH_DESCRIPTION = {
 
 const FORM_TEMPLATES_DATA = {
   templatesTabName: "ADMIN",
+  urlColumnPositionWithForms: 3,
   urlColumnPositionForTemplateForm: 4,
   fieldsOfInterestColumnName: "Zainteresowanie",
   contactFormTabName: "ContactForm"
 }
 
+const ANSWERS_FORM_DATA = {
+  customerIDColumnPosition: 1,
+  formIdColumnPosition: 2,
+  editLinkColumnPosition: 3,
+  answerIDcolumnPosition: 4,
+  folderURLColumnPositon: 5,
+  calculationUrlColumnPosition: 6,
+}
+
 const FIELDS_OF_INTERESTS_INPUTDATA = {
   "Fotowoltaika": {
+    aplicationName: "FOTO",
     urlColumnPosition: 9,
-    urlRowTemplatePosition: 3,
+    urlRowTemplatePosition: 4,
+    templatesFolderID: "",
+    dataBaseFolderID: "",
   },
   "Magazyny energii": {
-    urlColumnPosition: 11,
-    urlRowTemplatePosition: 4
+    aplicationName: "MAGE",
+    urlColumnPosition: 10,
+    urlRowTemplatePosition: 5,
+    templatesFolderID: "",
+    dataBaseFolderID: "",
   },
   "Kolektory solarne": {
-    urlColumnPosition: 13,
-    urlRowTemplatePosition: 5
+    aplicationName: "KOLS",
+    urlColumnPosition: 11,
+    urlRowTemplatePosition: 6,
+    templatesFolderID: "",
+    dataBaseFolderID: "",
   },
   "Pompy ciepła": {
-    urlColumnPosition: 15,
-    urlRowTemplatePosition: 6
+    aplicationName: "POMP",
+    urlColumnPosition: 12,
+    urlRowTemplatePosition: 7,
+    templatesFolderID: "",
+    dataBaseFolderID: "",
   },
 }
 
