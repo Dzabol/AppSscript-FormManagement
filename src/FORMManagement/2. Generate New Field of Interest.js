@@ -28,6 +28,19 @@ function generateUserSpaceForRequiredFieldOfInterest(
   const templateFormRowNumber = fieldOfInterestBasicInformations.urlRowTemplatePosition
   const editLinksData = getEditFormURL(eventData, sheetNameWithTemplatesFroms, columnNumberWithForm, templateFormRowNumber)
 
+  //Save in Sheet basic Form information
+  const formIdCell = tabToSaveData.getRange(rowNumberToSetData, answersFormBasicInformation.formIdColumnPosition);
+  const editLinkCell = tabToSaveData.getRange(rowNumberToSetData, answersFormBasicInformation.editLinkColumnPosition);
+  const responseIdCell = tabToSaveData.getRange(rowNumberToSetData, answersFormBasicInformation.answerIDcolumnPosition);
+  
+  formIdCell.setValue(customerInformations.formID)
+  editLinkCell.setFormula(`=HYPERLINK("${editLinksData.editLink}";"Edit Form")`)
+  responseIdCell.setValue(editLinksData.responseID)
+
+  /** 
+   * Files from Customer Folder
+   */
+
   //Create newFolderWithTemplates
   const dataFromFolders = createNewCustomerSpaceForAplication(
     customerInformations,
@@ -36,23 +49,21 @@ function generateUserSpaceForRequiredFieldOfInterest(
     descriptionsOfTheMonths
   )
 
+  //Set URL for Customer Folder
   const folderID = dataFromFolders.customerFolderID
   const folderURL = generateGoogleURL(folderID, "folder")
-  const calculationsFileUrl = ""
-
-  //get Ranges To save data
-  const formIdCell = tabToSaveData.getRange(rowNumberToSetData, answersFormBasicInformation.formIdColumnPosition);
-  const editLinkCell = tabToSaveData.getRange(rowNumberToSetData, answersFormBasicInformation.editLinkColumnPosition);
-  const responseIdCell = tabToSaveData.getRange(rowNumberToSetData, answersFormBasicInformation.answerIDcolumnPosition);
   const folderUrlCell = tabToSaveData.getRange(rowNumberToSetData, answersFormBasicInformation.folderURLColumnPositon);
-  const calculationsFileUrlCell = tabToSaveData.getRange(rowNumberToSetData, answersFormBasicInformation.calculationUrlColumnPosition);
 
-  //Save data in google sheets
-  formIdCell.setValue(customerInformations.formID)
-  editLinkCell.setFormula(`=HYPERLINK("${editLinksData.editLink}";"Edit Form")`)
-  responseIdCell.setValue(editLinksData.responseID)
   folderUrlCell.setFormula(`=HYPERLINK("${folderURL}";"Link to Folder")`)
-  calculationsFileUrlCell.setFormula(`=HYPERLINK("${calculationsFileUrl}";"Calculations")`)
+
+   //Set URL for other files from Cusotmer Folder defined in global variables
+   let otherObjects = generateDataForRequiredFileOrFolder(folderID,answersFormBasicInformation.otherLinks)
+   
+  otherObjects.forEach(file =>{
+    let range = tabToSaveData.getRange(rowNumberToSetData, file.columnNumberToSetData); 
+    let hyperLink = `=HYPERLINK("${file.url.toString()}";"Link")`
+    range.setFormula(hyperLink)
+  })
 }
 
 /**

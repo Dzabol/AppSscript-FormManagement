@@ -40,7 +40,7 @@ function listRootFolders(sourceFolderId) {
 
     const generateData = (idNumber) => {
         files = Drive.Files.list({
-            q: `"${idNumber}" in parents and trashed = false`,
+            q: `('${idNumber}' in parents or '${sourceFolderId}' in parents) and trashed = false`,
             includeItemsFromAllDrives: true,
             supportsAllDrives: true,
             corpora: 'allDrives',
@@ -65,7 +65,7 @@ function listRootFolders(sourceFolderId) {
             }
         }
         pageToken = files.nextPageToken;
-    }
+    }    
 
     do {
         try {

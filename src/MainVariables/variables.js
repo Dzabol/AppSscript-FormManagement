@@ -44,36 +44,55 @@ const ANSWERS_FORM_DATA = {
   editLinkColumnPosition: 3,
   answerIDcolumnPosition: 4,
   folderURLColumnPositon: 5,
-  calculationUrlColumnPosition: 6,
+  otherLinks: [{
+    name: "Kalkulator",
+    type: "sheet",
+    columnNumberToSetData: 6,
+    url: "",
+    id: "",
+  },
+  ],
 }
 
 const FIELDS_OF_INTERESTS_INPUTDATA = {
   "Fotowoltaika": {
+    realName: "Fotowoltaika",
     aplicationName: "FOTO",
     urlColumnPosition: 9,
     urlRowTemplatePosition: 4,
-    templatesFolderID: "",
-    dataBaseFolderID: "",
+    templatesFolderID: "1rPPeQBJA8uv9aAJLAWjZ7L6COa8Jqpd9",
+    dataBaseFolderID: "1LTDyHFS4G-NXAauD1WwIUIfvD0yvI8CU",
   },
-  "Magazyny energii": {
+  "MagazynyEnergii": {
+    realName: "Magazyny energii",
     aplicationName: "MAGE",
     urlColumnPosition: 10,
     urlRowTemplatePosition: 5,
-    templatesFolderID: "",
+    templatesFolderID: "1rPPeQBJA8uv9aAJLAWjZ7L6COa8Jqpd9",
     dataBaseFolderID: "",
   },
-  "Kolektory solarne": {
+  "KolektorySolarne": {
+    realName: "Kolektory solarne",
     aplicationName: "KOLS",
     urlColumnPosition: 11,
     urlRowTemplatePosition: 6,
-    templatesFolderID: "",
+    templatesFolderID: "1rPPeQBJA8uv9aAJLAWjZ7L6COa8Jqpd9",
     dataBaseFolderID: "",
   },
-  "Pompy ciepła": {
+  "PompyCiepla": {
+    realName: "Pompy ciepła",
     aplicationName: "POMP",
     urlColumnPosition: 12,
     urlRowTemplatePosition: 7,
-    templatesFolderID: "",
+    templatesFolderID: "1rPPeQBJA8uv9aAJLAWjZ7L6COa8Jqpd9",
+    dataBaseFolderID: "",
+  },
+    "Klimatyzacja": {
+    realName: "Klimatyzacja",
+    aplicationName: "KLIM",
+    urlColumnPosition: 13,
+    urlRowTemplatePosition: 8,
+    templatesFolderID: "1rPPeQBJA8uv9aAJLAWjZ7L6COa8Jqpd9",
     dataBaseFolderID: "",
   },
 }
